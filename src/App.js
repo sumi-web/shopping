@@ -41,10 +41,10 @@ const App = () => {
 	};
 
 	const removeCartItem = (id) => {
-		if (items.some((item) => (item.id === id ? !!item.countInCart : false))) {
+		if (items.some((item) => !!item.countInCart)) {
 			const newItemsList = items.map((item) => {
-				if (id === item.id) {
-					if (totalCartCount) setTotalCartPrice((prev) => prev - item.price);
+				if (id === item.id && !!item.countInCart) {
+					if (totalCartPrice) setTotalCartPrice((prev) => prev - item.price);
 					if (totalCartCount) setTotalCartCount((prev) => prev - 1);
 					return { ...item, countInCart: (item?.countInCart || 0) - 1 };
 				}
